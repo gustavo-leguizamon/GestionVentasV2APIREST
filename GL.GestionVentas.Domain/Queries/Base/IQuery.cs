@@ -12,6 +12,5 @@ namespace GL.GestionVentas.Domain.Queries.Base
         IQueryable<E> FindBy(Expression<Func<E, bool>> predicate);
         E FindById(int id);
         void Detach(E entity);
-        void AddRange(IEnumerable<E> entity);
     }
 }

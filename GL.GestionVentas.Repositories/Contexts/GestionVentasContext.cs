@@ -1,10 +1,13 @@
-﻿using System;
+﻿using GL.GestionVentas.Domain.Entities;
+using GL.GestionVentas.Repositories.Extensions;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace GL.GestionVentas.Repositories.Contexts
 {
-    public class AppContext : DbContext
+    public class GestionVentasContext : DbContext
     {
         public DbSet<Cliente> Cliente { get; set; }
         public DbSet<Ventas> Ventas { get; set; }

@@ -11,6 +11,7 @@ namespace GL.GestionVentas.Domain.Commands.Base
         void Delete(E entity);
         void Delete(int id);
         void Edit(E entity);
+        void EditRange(IEnumerable<E> entities);
         void Save();
         Task<int> SaveAsync();
         void Detach(E entity);
