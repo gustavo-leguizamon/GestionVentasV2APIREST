@@ -6,7 +6,10 @@
 
   <ItemGroup>
     <Folder Include="Commands\" />
-    <Folder Include="Queries\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\GL.GestionVentas.Domain\GL.GestionVentas.Domain.csproj" />
   </ItemGroup>
 
 </Project>

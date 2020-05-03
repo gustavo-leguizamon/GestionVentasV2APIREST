@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace GL.GestionVentas.Domain.Commands.Base
 {
-    public interface IBaseCommand<E> where E : class
+    public interface ICommand<E> where E : class
     {
         void Add(E entity);
         void Delete(E entity);
