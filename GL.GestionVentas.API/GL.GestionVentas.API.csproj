@@ -8,5 +8,9 @@
     <ProjectReference Include="..\GL.GestionVentas.Business\GL.GestionVentas.Business.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Controllers\" />
+  </ItemGroup>
+
 
 </Project>

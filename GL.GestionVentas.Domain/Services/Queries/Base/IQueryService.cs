@@ -4,13 +4,13 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 
-namespace GL.GestionVentas.Domain.Queries.Base
+namespace GL.GestionVentas.Domain.Services.Queries.Base
 {
-    public interface IQuery<E> where E : class
+    public interface IQueryService<E> where E : class
     {
-        IQueryable<E> GetAll();
+        void Detach(E entity);
         IQueryable<E> FindBy(Expression<Func<E, bool>> predicate);
         E FindById(int id);
-        void Detach(E entity);
+        IQueryable<E> GetAll();
     }
 }

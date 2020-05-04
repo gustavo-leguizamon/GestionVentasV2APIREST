@@ -1,4 +1,4 @@
-﻿using GL.GestionVentas.Domain.Queries.Base;
+﻿using GL.GestionVentas.Domain.Repositories.Queries.Base;
 using GL.GestionVentas.Repositories.Contexts;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -11,9 +11,9 @@ namespace GL.GestionVentas.Repositories.Queries.Base
 {
     public class QueryRepository<E> : IQuery<E> where E : class
     {
-        protected readonly GestionVentasContext Context;
+        protected readonly DbContext Context;
 
-        public QueryRepository(GestionVentasContext context)
+        public QueryRepository(DbContext context)
         {
             Context = context;
         }

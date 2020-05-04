@@ -1,4 +1,5 @@
-﻿using GL.GestionVentas.Domain.Commands.Base;
+﻿//using GL.GestionVentas.Domain.Commands.Base;
+using GL.GestionVentas.Domain.Repositories.Commands.Base;
 using GL.GestionVentas.Repositories.Contexts;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -10,9 +11,9 @@ namespace GL.GestionVentas.Repositories.Commands.Base
 {
     public class CommandRepository<E> : ICommand<E> where E : class
     {
-        protected readonly GestionVentasContext Context;
+        protected readonly DbContext Context;
 
-        public CommandRepository(GestionVentasContext context)
+        public CommandRepository(DbContext context)
         {
             Context = context;
         }
