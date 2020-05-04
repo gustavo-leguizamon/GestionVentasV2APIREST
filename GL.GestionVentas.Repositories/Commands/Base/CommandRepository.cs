@@ -1,5 +1,4 @@
-﻿//using GL.GestionVentas.Domain.Commands.Base;
-using GL.GestionVentas.Domain.Repositories.Commands.Base;
+﻿using GL.GestionVentas.Domain.Repositories.Commands.Base;
 using GL.GestionVentas.Repositories.Contexts;
 using Microsoft.EntityFrameworkCore;
 using System;
