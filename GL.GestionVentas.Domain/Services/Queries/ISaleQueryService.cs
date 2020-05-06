@@ -10,5 +10,6 @@ namespace GL.GestionVentas.Domain.Services.Queries
     {
 
         List<Ventas> DailySalesReport();
+        List<Ventas> GetProductInDailyReport(string productCode);
     }
 }

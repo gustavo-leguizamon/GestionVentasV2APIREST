@@ -21,5 +21,13 @@ namespace GL.GestionVentas.Business.Services.Queries
             var sales = FindBy(x => x.Fecha.DayOfYear >= DateTime.Now.DayOfYear, new string[] { "Cliente", "Producto" });
             return sales.ToList();
         }
+
+        public List<Ventas> GetProductInDailyReport(string productCode)
+        {
+            var salesOfTheDay = DailySalesReport();
+            var sales = salesOfTheDay.Where(x => x.Producto.Codigo.Equals(productCode)).ToList();
+
+            return sales;
+        }
     }
 }

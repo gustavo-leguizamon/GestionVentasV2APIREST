@@ -47,15 +47,15 @@ namespace GL.GestionVentas.API.Controllers
                 _command.RegisterSale(sale);
                 return Ok();
             }
-            catch(ProductNotFoundException ex)
+            catch (ProductNotFoundException ex)
             {
                 return StatusCode(404, ex.Message);
             }
-            catch(ClientNotFoundException ex)
+            catch (ClientNotFoundException ex)
             {
                 return StatusCode(404, ex.Message);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return StatusCode(500, ex.Message);
             }
@@ -67,6 +67,20 @@ namespace GL.GestionVentas.API.Controllers
             try
             {
                 var sales = _query.DailySalesReport();
+                return Ok(sales);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+
+        [HttpGet("{productCode}")]
+        public ActionResult<List<Ventas>> GetProductInDailyReport(string productCode)
+        {
+            try
+            {
+                var sales = _query.GetProductInDailyReport(productCode);
                 return Ok(sales);
             }
             catch(Exception ex)
