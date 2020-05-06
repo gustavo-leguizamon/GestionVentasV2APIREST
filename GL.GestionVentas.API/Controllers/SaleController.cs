@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 using GL.GestionVentas.Business.Exceptions;
 using GL.GestionVentas.Domain.Entities;
 using GL.GestionVentas.Domain.Models;
-using GL.GestionVentas.Domain.Services.Commands;
-using GL.GestionVentas.Domain.Services.Queries;
+using GL.GestionVentas.Domain.Interfaces.Services.Commands;
+using GL.GestionVentas.Domain.Interfaces.Services.Queries;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 

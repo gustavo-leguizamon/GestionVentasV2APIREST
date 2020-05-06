@@ -1,5 +1,5 @@
-﻿using GL.GestionVentas.Domain.Repositories.Queries.Base;
-using GL.GestionVentas.Domain.Services.Queries.Base;
+﻿using GL.GestionVentas.Domain.Interfaces.Repositories.Queries.Base;
+using GL.GestionVentas.Domain.Interfaces.Services.Queries.Base;
 using System;
 using System.Collections.Generic;
 using System.Linq;

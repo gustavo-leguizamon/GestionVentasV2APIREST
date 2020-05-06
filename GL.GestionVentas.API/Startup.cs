@@ -4,10 +4,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using GL.GestionVentas.Business.Services.Commands;
 using GL.GestionVentas.Business.Services.Queries;
-using GL.GestionVentas.Domain.Repositories.Commands;
-using GL.GestionVentas.Domain.Repositories.Queries;
-using GL.GestionVentas.Domain.Services.Commands;
-using GL.GestionVentas.Domain.Services.Queries;
+using GL.GestionVentas.Domain.Interfaces.Repositories.Commands;
+using GL.GestionVentas.Domain.Interfaces.Repositories.Queries;
+using GL.GestionVentas.Domain.Interfaces.Services.Commands;
+using GL.GestionVentas.Domain.Interfaces.Services.Queries;
 using GL.GestionVentas.Repositories.Commands;
 using GL.GestionVentas.Repositories.Commands.Base;
 using GL.GestionVentas.Repositories.Contexts;
@@ -55,6 +55,10 @@ namespace GL.GestionVentas.API
             services.AddScoped(typeof(ISaleQueryRepository), typeof(SaleQueryRepository));
             services.AddScoped(typeof(ISaleCommandService), typeof(SaleCommandService));
             services.AddScoped(typeof(ISaleQueryService), typeof(SaleQueryService));
+            services.AddScoped(typeof(IClientCommandRepository), typeof(ClientCommandRepository));
+            services.AddScoped(typeof(IClientQueryRepository), typeof(ClientQueryRepository));
+            services.AddScoped(typeof(IClientCommandService), typeof(ClientCommandService));
+            services.AddScoped(typeof(IClientQueryService), typeof(ClientQueryService));
 
             services.AddControllers();
 

@@ -1,10 +1,10 @@
 ﻿using GL.GestionVentas.Domain.Entities;
-using GL.GestionVentas.Domain.Services.Queries.Base;
+using GL.GestionVentas.Domain.Interfaces.Services.Queries.Base;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace GL.GestionVentas.Domain.Services.Queries
+namespace GL.GestionVentas.Domain.Interfaces.Services.Queries
 {
     public interface IProductQueryService : IQueryService<Producto>
     {

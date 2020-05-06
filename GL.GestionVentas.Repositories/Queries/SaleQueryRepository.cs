@@ -1,5 +1,5 @@
 ﻿using GL.GestionVentas.Domain.Entities;
-using GL.GestionVentas.Domain.Repositories.Queries;
+using GL.GestionVentas.Domain.Interfaces.Repositories.Queries;
 using GL.GestionVentas.Repositories.Contexts;
 using GL.GestionVentas.Repositories.Queries.Base;
 using Microsoft.EntityFrameworkCore;

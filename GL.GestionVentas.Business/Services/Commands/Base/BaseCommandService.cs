@@ -1,5 +1,5 @@
-﻿using GL.GestionVentas.Domain.Repositories.Commands.Base;
-using GL.GestionVentas.Domain.Services.Commands.Base;
+﻿using GL.GestionVentas.Domain.Interfaces.Repositories.Commands.Base;
+using GL.GestionVentas.Domain.Interfaces.Services.Commands.Base;
 using System;
 using System.Collections.Generic;
 using System.Text;

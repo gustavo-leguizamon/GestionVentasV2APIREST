@@ -2,16 +2,15 @@
 using GL.GestionVentas.Domain.Interfaces.Repositories.Commands;
 using GL.GestionVentas.Repositories.Commands.Base;
 using GL.GestionVentas.Repositories.Contexts;
-using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace GL.GestionVentas.Repositories.Commands
 {
-    public class SaleCommandRepository : CommandRepository<Ventas>, ISaleCommandRepository
+    public class ClientCommandRepository : CommandRepository<Cliente>, IClientCommandRepository
     {
-        public SaleCommandRepository(GestionVentasContext context) : base(context)
+        public ClientCommandRepository(GestionVentasContext context) : base(context)
         {
         }
     }

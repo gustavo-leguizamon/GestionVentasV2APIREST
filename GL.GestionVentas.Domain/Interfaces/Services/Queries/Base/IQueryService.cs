@@ -4,7 +4,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 
-namespace GL.GestionVentas.Domain.Services.Queries.Base
+namespace GL.GestionVentas.Domain.Interfaces.Services.Queries.Base
 {
     public interface IQueryService<E> where E : class
     {
