@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
+using GL.GestionVentas.Business.Mappers;
 using GL.GestionVentas.Business.Services.Commands;
 using GL.GestionVentas.Business.Services.Queries;
 using GL.GestionVentas.Domain.Interfaces.Repositories.Commands;
@@ -49,6 +51,15 @@ namespace GL.GestionVentas.API
                     Description = "Test services"
                 });
             });
+
+            // Auto Mapper Configurations
+            var mappingConfig = new MapperConfiguration(mc =>
+            {
+                mc.AddProfile(new AutoMappingProfile());
+            });
+
+            IMapper mapper = mappingConfig.CreateMapper();
+            services.AddSingleton(mapper);
 
             services.AddDbContext<GestionVentasContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddScoped(typeof(ISaleCommandRepository), typeof(SaleCommandRepository));
