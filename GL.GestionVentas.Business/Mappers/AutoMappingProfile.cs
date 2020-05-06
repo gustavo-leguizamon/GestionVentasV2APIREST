@@ -11,9 +11,9 @@ namespace GL.GestionVentas.Business.Mappers
     {
         public AutoMappingProfile()
         {
-            CreateMap<Cliente, ClientDTO>(); // means you want to map from <> to <>
+            CreateMap<Cliente, ClientDTO>().ReverseMap(); // means you want to map from <> to <>
 
-            CreateMap<ClientDTO, Cliente>();
+            CreateMap<Producto, ProductDTO>().ReverseMap();
         }
     }
 }
