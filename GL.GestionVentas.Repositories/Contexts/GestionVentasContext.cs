@@ -9,6 +9,15 @@ namespace GL.GestionVentas.Repositories.Contexts
 {
     public class GestionVentasContext : DbContext
     {
+        public GestionVentasContext()
+        {
+        }
+
+        public GestionVentasContext(DbContextOptions<GestionVentasContext> options)
+            : base(options)
+        {
+        }
+
         public DbSet<Cliente> Cliente { get; set; }
         public DbSet<Ventas> Ventas { get; set; }
         public DbSet<Producto> Producto { get; set; }

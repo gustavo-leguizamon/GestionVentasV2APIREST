@@ -11,9 +11,9 @@ namespace GL.GestionVentas.Repositories.Queries.Base
 {
     public class QueryRepository<E> : IQuery<E> where E : class
     {
-        protected readonly DbContext Context;
+        protected readonly GestionVentasContext Context;
 
-        public QueryRepository(DbContext context)
+        public QueryRepository(GestionVentasContext context)
         {
             Context = context;
         }
@@ -23,10 +23,17 @@ namespace GL.GestionVentas.Repositories.Queries.Base
             Context.Entry(entity).State = EntityState.Detached;
         }
 
-        public virtual IQueryable<E> FindBy(Expression<Func<E, bool>> predicate)
+        public virtual IQueryable<E> FindBy(Expression<Func<E, bool>> predicate, string[] includeProperties = null)
         {
-            IQueryable<E> query = Context.Set<E>().Where(predicate);
-            return query;
+            IQueryable<E> query = Context.Set<E>();
+
+            if (includeProperties != null)
+                foreach (string includeProperty in includeProperties)
+                {
+                    query = query.Include(includeProperty);
+                }
+
+            return query.Where(predicate);
         }
 
         public virtual E FindById(int id)

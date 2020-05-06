@@ -10,9 +10,9 @@ namespace GL.GestionVentas.Repositories.Commands.Base
 {
     public class CommandRepository<E> : ICommand<E> where E : class
     {
-        protected readonly DbContext Context;
+        protected readonly GestionVentasContext Context;
 
-        public CommandRepository(DbContext context)
+        public CommandRepository(GestionVentasContext context)
         {
             Context = context;
         }

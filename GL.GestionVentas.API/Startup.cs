@@ -2,14 +2,26 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using GL.GestionVentas.Business.Services.Commands;
+using GL.GestionVentas.Business.Services.Queries;
+using GL.GestionVentas.Domain.Repositories.Commands;
+using GL.GestionVentas.Domain.Repositories.Queries;
+using GL.GestionVentas.Domain.Services.Commands;
+using GL.GestionVentas.Domain.Services.Queries;
+using GL.GestionVentas.Repositories.Commands;
+using GL.GestionVentas.Repositories.Commands.Base;
+using GL.GestionVentas.Repositories.Contexts;
+using GL.GestionVentas.Repositories.Queries;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using Newtonsoft.Json;
 
 namespace GL.GestionVentas.API
 {
@@ -25,6 +37,9 @@ namespace GL.GestionVentas.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //Remove circular rerferences in json response
+            services.AddMvc().AddNewtonsoftJson(options => options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore);
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo
@@ -35,7 +50,11 @@ namespace GL.GestionVentas.API
                 });
             });
 
-
+            services.AddDbContext<GestionVentasContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddScoped(typeof(ISaleCommandRepository), typeof(SaleCommandRepository));
+            services.AddScoped(typeof(ISaleQueryRepository), typeof(SaleQueryRepository));
+            services.AddScoped(typeof(ISaleCommandService), typeof(SaleCommandService));
+            services.AddScoped(typeof(ISaleQueryService), typeof(SaleQueryService));
 
             services.AddControllers();
 

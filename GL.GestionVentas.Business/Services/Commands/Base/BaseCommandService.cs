@@ -16,52 +16,52 @@ namespace GL.GestionVentas.Business.Services.Commands.Base
             Command = command;
         }
 
-        public void Add(E entity)
+        public virtual void Add(E entity)
         {
             Command.Add(entity);
         }
 
-        public void AddRange(IEnumerable<E> entities)
+        public virtual void AddRange(IEnumerable<E> entities)
         {
             Command.AddRange(entities);
         }
 
-        public void Delete(E entity)
+        public virtual void Delete(E entity)
         {
             Command.Delete(entity);
         }
 
-        public void Delete(int id)
+        public virtual void Delete(int id)
         {
             Command.Delete(id);
         }
 
-        public void DeleteRange(IEnumerable<E> entities)
+        public virtual void DeleteRange(IEnumerable<E> entities)
         {
             Command.DeleteRange(entities);
         }
 
-        public void Detach(E entity)
+        public virtual void Detach(E entity)
         {
             Command.Detach(entity);
         }
 
-        public void Edit(E entity)
+        public virtual void Edit(E entity)
         {
             Command.Edit(entity);
         }
 
-        public void EditRange(IEnumerable<E> entities)
+        public virtual void EditRange(IEnumerable<E> entities)
         {
             Command.EditRange(entities);
         }
 
-        public void Save()
+        public virtual void Save()
         {
             Command.Save();
         }
 
-        public Task<int> SaveAsync()
+        public virtual Task<int> SaveAsync()
         {
             return Command.SaveAsync();
         }

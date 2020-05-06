@@ -9,7 +9,7 @@ namespace GL.GestionVentas.Domain.Repositories.Queries.Base
     public interface IQuery<E> where E : class
     {
         IQueryable<E> GetAll();
-        IQueryable<E> FindBy(Expression<Func<E, bool>> predicate);
+        IQueryable<E> FindBy(Expression<Func<E, bool>> predicate, string[] includeProperties = null);
         E FindById(int id);
         void Detach(E entity);
     }

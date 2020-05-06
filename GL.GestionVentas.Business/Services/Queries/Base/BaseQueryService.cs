@@ -22,9 +22,9 @@ namespace GL.GestionVentas.Business.Services.Queries.Base
             Query.Detach(entity);
         }
 
-        public IQueryable<E> FindBy(Expression<Func<E, bool>> predicate)
+        public IQueryable<E> FindBy(Expression<Func<E, bool>> predicate, string[] includeProperties = null)
         {
-            return Query.FindBy(predicate);
+            return Query.FindBy(predicate, includeProperties);
         }
 
         public E FindById(int id)
