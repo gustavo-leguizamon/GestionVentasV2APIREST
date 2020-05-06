@@ -63,13 +63,15 @@ namespace GL.GestionVentas.API
 
             services.AddDbContext<GestionVentasContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddScoped(typeof(ISaleCommandRepository), typeof(SaleCommandRepository));
-            services.AddScoped(typeof(ISaleQueryRepository), typeof(SaleQueryRepository));
             services.AddScoped(typeof(ISaleCommandService), typeof(SaleCommandService));
+            services.AddScoped(typeof(ISaleQueryRepository), typeof(SaleQueryRepository));
             services.AddScoped(typeof(ISaleQueryService), typeof(SaleQueryService));
             services.AddScoped(typeof(IClientCommandRepository), typeof(ClientCommandRepository));
-            services.AddScoped(typeof(IClientQueryRepository), typeof(ClientQueryRepository));
             services.AddScoped(typeof(IClientCommandService), typeof(ClientCommandService));
+            services.AddScoped(typeof(IClientQueryRepository), typeof(ClientQueryRepository));
             services.AddScoped(typeof(IClientQueryService), typeof(ClientQueryService));
+            services.AddScoped(typeof(IProductCommandRepository), typeof(ProductCommandRepository));
+            services.AddScoped(typeof(IProductCommandService), typeof(ProductCommandService));
 
             services.AddControllers();
 
