@@ -12,12 +12,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using AutoMapper;
 
 namespace GL.GestionVentas.Business.Services.Commands
 {
     public class SaleCommandService : BaseCommandService<Ventas>, ISaleCommandService
     {
-        public SaleCommandService(ISaleCommandRepository command) : base(command)
+        public SaleCommandService(ISaleCommandRepository command, IMapper mapper) : base(command, mapper)
         {
         }
 

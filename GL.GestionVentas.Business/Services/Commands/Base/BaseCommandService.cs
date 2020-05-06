@@ -1,4 +1,5 @@
-﻿using GL.GestionVentas.Domain.Interfaces.Repositories.Commands.Base;
+﻿using AutoMapper;
+using GL.GestionVentas.Domain.Interfaces.Repositories.Commands.Base;
 using GL.GestionVentas.Domain.Interfaces.Services.Commands.Base;
 using System;
 using System.Collections.Generic;
@@ -10,10 +11,12 @@ namespace GL.GestionVentas.Business.Services.Commands.Base
     public class BaseCommandService<E> : ICommandService<E> where E : class
     {
         protected readonly ICommand<E> Command;
+        protected IMapper Mapper;
 
-        public BaseCommandService(ICommand<E> command)
+        public BaseCommandService(ICommand<E> command, IMapper mapper)
         {
             Command = command;
+            Mapper = mapper;
         }
 
         public virtual void Add(E entity)
