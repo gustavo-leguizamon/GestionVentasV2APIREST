@@ -4,12 +4,13 @@ using System.Text;
 
 namespace GL.GestionVentas.Domain.Entities
 {
-    public class Ventas
+    public class CarritoProducto
     {
-        public int VentasId { get; set; }
-        public DateTime Fecha { get; set; }
+        public int CarritoProductoId { get; set; }
         public int CarritoId { get; set; }
+        public int ProductoId { get; set; }
 
         public virtual Carrito Carrito { get; set; }
+        public virtual Producto Producto { get; set; }
     }
 }
