@@ -25,20 +25,6 @@ namespace GL.GestionVentas.API.Controllers
             _query = query;
         }
 
-        //[HttpGet]
-        //public ActionResult GetSales()
-        //{
-        //    try
-        //    {
-        //        var sales = _query.GetAll().ToList();
-        //        return Ok(sales);
-        //    }
-        //    catch(Exception ex)
-        //    {
-        //        return StatusCode(500, ex.Message);
-        //    }
-        //}
-
         [HttpPost]
         public ActionResult RegisterSale([FromBody]SaleDTO sale)
         {

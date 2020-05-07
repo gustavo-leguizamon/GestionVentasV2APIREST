@@ -4,9 +4,8 @@ using System.Text;
 
 namespace GL.GestionVentas.Domain.Models
 {
-    public class SaleDTO
+    public class CartDTO
     {
-        public string Dni { get; set; }
-        public List<CartDTO> Carts { get; set; }
+        public List<ProductDTO> Products { get; set; }
     }
 }
