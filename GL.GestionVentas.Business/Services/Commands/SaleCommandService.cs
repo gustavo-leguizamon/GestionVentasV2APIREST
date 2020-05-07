@@ -38,14 +38,14 @@ namespace GL.GestionVentas.Business.Services.Commands
 
             }
 
-            var newSale = new Ventas()
-            {
-                ClienteId = client.ClienteId,
-                ProductoId = product.ProductoId,
-                Fecha = DateTime.Now
-            };
+            //var newSale = new Ventas()
+            //{
+            //    ClienteId = client.ClienteId,
+            //    ProductoId = product.ProductoId,
+            //    Fecha = DateTime.Now
+            //};
 
-            Command.Add(newSale);
+            //Command.Add(newSale);
         }
     }
 }

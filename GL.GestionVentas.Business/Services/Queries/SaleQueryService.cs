@@ -25,7 +25,8 @@ namespace GL.GestionVentas.Business.Services.Queries
         public List<Ventas> GetProductInDailyReport(string productCode)
         {
             var salesOfTheDay = DailySalesReport();
-            var sales = salesOfTheDay.Where(x => x.Producto.Codigo.Equals(productCode)).ToList();
+            //var sales = salesOfTheDay.Where(x => x.Producto.Codigo.Equals(productCode)).ToList();
+            var sales = new List<Ventas>();
 
             return sales;
         }

@@ -11,6 +11,6 @@ namespace GL.GestionVentas.Domain.Entities
         public string Marca { get; set; }
         public string Nombre { get; set; }
         public decimal Precio { get; set; }
-        public virtual ICollection<Ventas> Ventas { get; set; }
+        public virtual ICollection<CarritoProducto> CarritoProductos { get; set; }
     }
 }

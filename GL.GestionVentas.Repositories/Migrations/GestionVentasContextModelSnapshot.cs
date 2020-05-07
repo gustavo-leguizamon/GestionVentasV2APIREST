@@ -19,6 +19,79 @@ namespace GL.GestionVentas.Repositories.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("GL.GestionVentas.Domain.Entities.Carrito", b =>
+                {
+                    b.Property<int>("CarritoId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("ClienteId")
+                        .HasColumnType("int");
+
+                    b.HasKey("CarritoId");
+
+                    b.HasIndex("ClienteId");
+
+                    b.ToTable("Carrito");
+
+                    b.HasData(
+                        new
+                        {
+                            CarritoId = 1,
+                            ClienteId = 1
+                        },
+                        new
+                        {
+                            CarritoId = 2,
+                            ClienteId = 2
+                        });
+                });
+
+            modelBuilder.Entity("GL.GestionVentas.Domain.Entities.CarritoProducto", b =>
+                {
+                    b.Property<int>("CarritoProductoId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:IdentityIncrement", 1)
+                        .HasAnnotation("SqlServer:IdentitySeed", 1)
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("CarritoId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProductoId")
+                        .HasColumnType("int");
+
+                    b.HasKey("CarritoProductoId");
+
+                    b.HasIndex("CarritoId");
+
+                    b.HasIndex("ProductoId");
+
+                    b.ToTable("CarritoProducto");
+
+                    b.HasData(
+                        new
+                        {
+                            CarritoProductoId = 1,
+                            CarritoId = 1,
+                            ProductoId = 3
+                        },
+                        new
+                        {
+                            CarritoProductoId = 2,
+                            CarritoId = 1,
+                            ProductoId = 4
+                        },
+                        new
+                        {
+                            CarritoProductoId = 3,
+                            CarritoId = 2,
+                            ProductoId = 3
+                        });
+                });
+
             modelBuilder.Entity("GL.GestionVentas.Domain.Entities.Cliente", b =>
                 {
                     b.Property<int>("ClienteId")
@@ -170,20 +243,15 @@ namespace GL.GestionVentas.Repositories.Migrations
                         .HasAnnotation("SqlServer:IdentitySeed", 1)
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("ClienteId")
+                    b.Property<int>("CarritoId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("Fecha")
                         .HasColumnType("datetime");
 
-                    b.Property<int>("ProductoId")
-                        .HasColumnType("int");
-
                     b.HasKey("VentasId");
 
-                    b.HasIndex("ClienteId");
-
-                    b.HasIndex("ProductoId");
+                    b.HasIndex("CarritoId");
 
                     b.ToTable("Ventas");
 
@@ -191,30 +259,52 @@ namespace GL.GestionVentas.Repositories.Migrations
                         new
                         {
                             VentasId = 1,
-                            ClienteId = 1,
-                            Fecha = new DateTime(2020, 5, 3, 22, 43, 21, 40, DateTimeKind.Local).AddTicks(2237),
-                            ProductoId = 1
+                            CarritoId = 1,
+                            Fecha = new DateTime(2020, 5, 7, 1, 12, 17, 630, DateTimeKind.Local).AddTicks(1415)
                         },
                         new
                         {
                             VentasId = 2,
-                            ClienteId = 1,
-                            Fecha = new DateTime(2020, 5, 3, 22, 43, 21, 42, DateTimeKind.Local).AddTicks(790),
-                            ProductoId = 2
+                            CarritoId = 1,
+                            Fecha = new DateTime(2020, 5, 7, 1, 12, 17, 631, DateTimeKind.Local).AddTicks(9391)
+                        },
+                        new
+                        {
+                            VentasId = 3,
+                            CarritoId = 2,
+                            Fecha = new DateTime(2020, 5, 7, 1, 12, 17, 631, DateTimeKind.Local).AddTicks(9494)
                         });
                 });
 
-            modelBuilder.Entity("GL.GestionVentas.Domain.Entities.Ventas", b =>
+            modelBuilder.Entity("GL.GestionVentas.Domain.Entities.Carrito", b =>
                 {
                     b.HasOne("GL.GestionVentas.Domain.Entities.Cliente", "Cliente")
-                        .WithMany("Ventas")
+                        .WithMany("Carritos")
                         .HasForeignKey("ClienteId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("GL.GestionVentas.Domain.Entities.CarritoProducto", b =>
+                {
+                    b.HasOne("GL.GestionVentas.Domain.Entities.Carrito", "Carrito")
+                        .WithMany("CarritoProductos")
+                        .HasForeignKey("CarritoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("GL.GestionVentas.Domain.Entities.Producto", "Producto")
-                        .WithMany("Ventas")
+                        .WithMany("CarritoProductos")
                         .HasForeignKey("ProductoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("GL.GestionVentas.Domain.Entities.Ventas", b =>
+                {
+                    b.HasOne("GL.GestionVentas.Domain.Entities.Carrito", "Carrito")
+                        .WithMany("Ventas")
+                        .HasForeignKey("CarritoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

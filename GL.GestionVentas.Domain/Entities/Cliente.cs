@@ -11,6 +11,7 @@ namespace GL.GestionVentas.Domain.Entities
         public string Apellido { get; set; }
         public string Direccion { get; set; }
         public string Telefono { get; set; }
-        public virtual ICollection<Ventas> Ventas { get; set; }
+
+        public virtual ICollection<Carrito> Carritos { get; set; }
     }
 }

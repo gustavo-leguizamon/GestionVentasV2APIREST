@@ -21,6 +21,8 @@ namespace GL.GestionVentas.Repositories.Contexts
         public DbSet<Cliente> Cliente { get; set; }
         public DbSet<Ventas> Ventas { get; set; }
         public DbSet<Producto> Producto { get; set; }
+        public DbSet<CarritoProducto> CarritoProducto { get; set; }
+        public DbSet<Carrito> Carrito { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -48,6 +50,50 @@ namespace GL.GestionVentas.Repositories.Contexts
                 );
             });
 
+            modelBuilder.Entity<Carrito>(entity =>
+            {
+                entity.HasKey(e => e.CarritoId);
+                entity.Property(e => e.CarritoId).ValueGeneratedOnAdd();
+
+                entity.HasOne(e => e.Cliente).WithMany(c => c.Carritos).HasForeignKey(e => e.ClienteId).IsRequired();
+
+                entity.HasData(
+                    new Carrito() { CarritoId = 1, ClienteId = 1 },
+                    new Carrito() { CarritoId = 2, ClienteId = 2 }
+                );
+
+            });
+
+            modelBuilder.Entity<Ventas>(entity =>
+            {
+                entity.HasKey(e => e.VentasId);
+                entity.Property(e => e.VentasId).UseIdentityColumn();
+                entity.Property(e => e.Fecha).HasColumnType("datetime").IsRequired();
+
+                entity.HasOne(e => e.Carrito).WithMany(c => c.Ventas).HasForeignKey(e => e.CarritoId).IsRequired();
+
+                entity.HasData(
+                    new Ventas() { VentasId = 1, Fecha = DateTime.Now, CarritoId = 1 },
+                    new Ventas() { VentasId = 2, Fecha = DateTime.Now, CarritoId = 1 },
+                    new Ventas() { VentasId = 3, Fecha = DateTime.Now, CarritoId = 2 }
+                );
+            });
+
+            modelBuilder.Entity<CarritoProducto>(entity =>
+            {
+                entity.HasKey(e => e.CarritoProductoId);
+                entity.Property(e => e.CarritoProductoId).UseIdentityColumn();
+
+                entity.HasOne(e => e.Carrito).WithMany(c => c.CarritoProductos).HasForeignKey(e => e.CarritoId).IsRequired();
+                entity.HasOne(e => e.Producto).WithMany(p => p.CarritoProductos).HasForeignKey(e => e.ProductoId).IsRequired();
+
+                entity.HasData(
+                    new CarritoProducto() { CarritoProductoId = 1, CarritoId = 1, ProductoId = 3 },
+                    new CarritoProducto() { CarritoProductoId = 2, CarritoId = 1, ProductoId = 4 },
+                    new CarritoProducto() { CarritoProductoId = 3, CarritoId = 2, ProductoId = 3 }
+                );
+            });
+
             modelBuilder.Entity<Producto>(entity =>
             {
                 entity.HasKey(e => e.ProductoId);
@@ -64,20 +110,6 @@ namespace GL.GestionVentas.Repositories.Contexts
                     new Producto() { ProductoId = 3, Codigo = "TEC", Nombre = "Teclado", Marca = "Noganet", Precio = 20 },
                     new Producto() { ProductoId = 4, Codigo = "MON", Nombre = "Monitor", Marca = "Samsung", Precio = 38 },
                     new Producto() { ProductoId = 5, Codigo = "CPU", Nombre = "CPU", Marca = "Gigabit", Precio = 250 }
-                );
-            });
-
-            modelBuilder.Entity<Ventas>(entity =>
-            {
-                entity.HasKey(e => e.VentasId);
-                entity.Property(e => e.VentasId).UseIdentityColumn();
-                entity.Property(e => e.Fecha).HasColumnType("datetime").IsRequired();
-                entity.HasOne(e => e.Cliente).WithMany(c => c.Ventas).HasForeignKey(e => e.ClienteId).IsRequired();
-                entity.HasOne(e => e.Producto).WithMany(p => p.Ventas).HasForeignKey(e => e.ProductoId).IsRequired();
-
-                entity.HasData(
-                    new Ventas() { VentasId = 1, Fecha = DateTime.Now, ClienteId = 1, ProductoId = 1 },
-                    new Ventas() { VentasId = 2, Fecha = DateTime.Now, ClienteId = 1, ProductoId = 2 }
                 );
             });
         }

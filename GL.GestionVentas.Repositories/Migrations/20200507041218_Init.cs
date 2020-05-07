@@ -41,29 +41,67 @@ namespace GL.GestionVentas.Repositories.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Carrito",
+                columns: table => new
+                {
+                    CarritoId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ClienteId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Carrito", x => x.CarritoId);
+                    table.ForeignKey(
+                        name: "FK_Carrito_Cliente_ClienteId",
+                        column: x => x.ClienteId,
+                        principalTable: "Cliente",
+                        principalColumn: "ClienteId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "CarritoProducto",
+                columns: table => new
+                {
+                    CarritoProductoId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CarritoId = table.Column<int>(nullable: false),
+                    ProductoId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CarritoProducto", x => x.CarritoProductoId);
+                    table.ForeignKey(
+                        name: "FK_CarritoProducto_Carrito_CarritoId",
+                        column: x => x.CarritoId,
+                        principalTable: "Carrito",
+                        principalColumn: "CarritoId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_CarritoProducto_Producto_ProductoId",
+                        column: x => x.ProductoId,
+                        principalTable: "Producto",
+                        principalColumn: "ProductoId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Ventas",
                 columns: table => new
                 {
                     VentasId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Fecha = table.Column<DateTime>(type: "datetime", nullable: false),
-                    ClienteId = table.Column<int>(nullable: false),
-                    ProductoId = table.Column<int>(nullable: false)
+                    CarritoId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Ventas", x => x.VentasId);
                     table.ForeignKey(
-                        name: "FK_Ventas_Cliente_ClienteId",
-                        column: x => x.ClienteId,
-                        principalTable: "Cliente",
-                        principalColumn: "ClienteId",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Ventas_Producto_ProductoId",
-                        column: x => x.ProductoId,
-                        principalTable: "Producto",
-                        principalColumn: "ProductoId",
+                        name: "FK_Ventas_Carrito_CarritoId",
+                        column: x => x.CarritoId,
+                        principalTable: "Carrito",
+                        principalColumn: "CarritoId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -90,14 +128,49 @@ namespace GL.GestionVentas.Repositories.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Ventas",
-                columns: new[] { "VentasId", "ClienteId", "Fecha", "ProductoId" },
-                values: new object[] { 1, 1, new DateTime(2020, 5, 3, 22, 43, 21, 40, DateTimeKind.Local).AddTicks(2237), 1 });
+                table: "Carrito",
+                columns: new[] { "CarritoId", "ClienteId" },
+                values: new object[] { 1, 1 });
+
+            migrationBuilder.InsertData(
+                table: "Carrito",
+                columns: new[] { "CarritoId", "ClienteId" },
+                values: new object[] { 2, 2 });
+
+            migrationBuilder.InsertData(
+                table: "CarritoProducto",
+                columns: new[] { "CarritoProductoId", "CarritoId", "ProductoId" },
+                values: new object[,]
+                {
+                    { 1, 1, 3 },
+                    { 2, 1, 4 },
+                    { 3, 2, 3 }
+                });
 
             migrationBuilder.InsertData(
                 table: "Ventas",
-                columns: new[] { "VentasId", "ClienteId", "Fecha", "ProductoId" },
-                values: new object[] { 2, 1, new DateTime(2020, 5, 3, 22, 43, 21, 42, DateTimeKind.Local).AddTicks(790), 2 });
+                columns: new[] { "VentasId", "CarritoId", "Fecha" },
+                values: new object[,]
+                {
+                    { 1, 1, new DateTime(2020, 5, 7, 1, 12, 17, 630, DateTimeKind.Local).AddTicks(1415) },
+                    { 2, 1, new DateTime(2020, 5, 7, 1, 12, 17, 631, DateTimeKind.Local).AddTicks(9391) },
+                    { 3, 2, new DateTime(2020, 5, 7, 1, 12, 17, 631, DateTimeKind.Local).AddTicks(9494) }
+                });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Carrito_ClienteId",
+                table: "Carrito",
+                column: "ClienteId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CarritoProducto_CarritoId",
+                table: "CarritoProducto",
+                column: "CarritoId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CarritoProducto_ProductoId",
+                table: "CarritoProducto",
+                column: "ProductoId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Producto_Codigo",
@@ -106,26 +179,27 @@ namespace GL.GestionVentas.Repositories.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Ventas_ClienteId",
+                name: "IX_Ventas_CarritoId",
                 table: "Ventas",
-                column: "ClienteId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Ventas_ProductoId",
-                table: "Ventas",
-                column: "ProductoId");
+                column: "CarritoId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "CarritoProducto");
+
+            migrationBuilder.DropTable(
                 name: "Ventas");
 
             migrationBuilder.DropTable(
-                name: "Cliente");
+                name: "Producto");
 
             migrationBuilder.DropTable(
-                name: "Producto");
+                name: "Carrito");
+
+            migrationBuilder.DropTable(
+                name: "Cliente");
         }
     }
 }
