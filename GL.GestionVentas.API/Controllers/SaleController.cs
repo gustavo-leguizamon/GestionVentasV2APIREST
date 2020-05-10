@@ -39,8 +39,8 @@ namespace GL.GestionVentas.API.Controllers
             }
         }
 
-        [HttpGet]
-        public ActionResult<List<Ventas>> DailySalesReport()
+        [HttpGet("DailyReport")]
+        public ActionResult<List<DailySaleDTO>> DailySalesReport()
         {
             try
             {
@@ -53,12 +53,12 @@ namespace GL.GestionVentas.API.Controllers
             }
         }
 
-        [HttpGet("{productCode}")]
-        public ActionResult<List<Ventas>> GetProductInDailyReport(string productCode)
+        [HttpGet("DailyReport/{productId}")]
+        public ActionResult<List<DailySaleDTO>> GetProductInDailyReport(int productId)
         {
             try
             {
-                var sales = _query.GetProductInDailyReport(productCode);
+                var sales = _query.GetProductInDailyReport(productId);
                 return Ok(sales);
             }
             catch(Exception ex)

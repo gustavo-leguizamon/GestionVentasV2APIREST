@@ -36,5 +36,47 @@ namespace GL.GestionVentas.API.Controllers
                 return StatusCode(500, ex.Message);
             }
         }
+
+        [HttpGet]
+        public ActionResult<List<ClientDTO>> GetClients()
+        {
+            try
+            {
+                var clients = _query.GetAllClients();
+                return Ok(clients);
+            }
+            catch(Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+
+        [HttpGet("GetByDNI/{dni}")]
+        public ActionResult<List<ClientDTO>> GetClientsByDNI(string dni)
+        {
+            try
+            {
+                var clients = _query.GetClientsByDNI(dni);
+                return Ok(clients);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+
+        [HttpGet("GetByName/{name}/{lastname}")]
+        public ActionResult<List<ClientDTO>> GetClientsByName(string name, string lastname)
+        {
+            try
+            {
+                var clients = _query.GetClientsByName(name, lastname);
+                return Ok(clients);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
     }
 }

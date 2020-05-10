@@ -6,6 +6,7 @@ namespace GL.GestionVentas.Domain.Models
 {
     public class ClientDTO
     {
+        public int ClienteId { get; set; }
         public string DNI { get; set; }
         public string Nombre { get; set; }
         public string Apellido { get; set; }

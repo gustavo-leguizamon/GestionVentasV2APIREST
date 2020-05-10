@@ -28,9 +28,9 @@ namespace GL.GestionVentas.Business.Services.Commands
             sale.Fecha = DateTime.Now;
             sale.Carrito.ClienteId = saleDto.ClienteId;
             var carts = new List<CarritoProducto>();
-            carts.AddRange(saleDto.Cart.Products.Select(x => new CarritoProducto() { ProductoId = x.ProductoId }));
+            carts.AddRange(saleDto.Carrito.Productos.Select(x => new CarritoProducto() { ProductoId = x.ProductoId }));
 
-            Mapper.Map(carts, sale.Carrito.CarritoProductos);
+            Mapper.Map(carts, sale.Carrito.CarritoProducto);
 
             Command.Add(sale);
         }

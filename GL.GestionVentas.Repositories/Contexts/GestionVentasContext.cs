@@ -84,7 +84,7 @@ namespace GL.GestionVentas.Repositories.Contexts
                 entity.HasKey(e => e.CarritoProductoId);
                 entity.Property(e => e.CarritoProductoId).UseIdentityColumn();
 
-                entity.HasOne(e => e.Carrito).WithMany(c => c.CarritoProductos).HasForeignKey(e => e.CarritoId).IsRequired();
+                entity.HasOne(e => e.Carrito).WithMany(c => c.CarritoProducto).HasForeignKey(e => e.CarritoId).IsRequired();
                 entity.HasOne(e => e.Producto).WithMany(p => p.CarritoProductos).HasForeignKey(e => e.ProductoId).IsRequired();
 
                 entity.HasData(

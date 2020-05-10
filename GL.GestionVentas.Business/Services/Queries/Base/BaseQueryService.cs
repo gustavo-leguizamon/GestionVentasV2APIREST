@@ -1,4 +1,5 @@
-﻿using GL.GestionVentas.Domain.Interfaces.Repositories.Queries.Base;
+﻿using AutoMapper;
+using GL.GestionVentas.Domain.Interfaces.Repositories.Queries.Base;
 using GL.GestionVentas.Domain.Interfaces.Services.Queries.Base;
 using System;
 using System.Collections.Generic;
@@ -11,28 +12,30 @@ namespace GL.GestionVentas.Business.Services.Queries.Base
     public abstract class BaseQueryService<E> : IQueryService<E> where E : class
     {
         protected readonly IQuery<E> Query;
+        protected readonly IMapper Mapper;
 
-        public BaseQueryService(IQuery<E> query)
+        public BaseQueryService(IQuery<E> query, IMapper mapper)
         {
             Query = query;
+            Mapper = mapper;
         }
 
-        public void Detach(E entity)
+        public virtual void Detach(E entity)
         {
             Query.Detach(entity);
         }
 
-        public IQueryable<E> FindBy(Expression<Func<E, bool>> predicate, string[] includeProperties = null)
+        public virtual IQueryable<E> FindBy(Expression<Func<E, bool>> predicate, string[] includeProperties = null)
         {
             return Query.FindBy(predicate, includeProperties);
         }
 
-        public E FindById(int id)
+        public virtual E FindById(int id)
         {
             return Query.FindById(id);
         }
 
-        public IQueryable<E> GetAll()
+        public virtual IQueryable<E> GetAll()
         {
             return Query.GetAll();
         }
