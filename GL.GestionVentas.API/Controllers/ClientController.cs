@@ -36,5 +36,19 @@ namespace GL.GestionVentas.API.Controllers
                 return StatusCode(500, ex.Message);
             }
         }
+
+        [HttpGet]
+        public ActionResult<List<ClientDTO>> GetClients()
+        {
+            try
+            {
+                var clients = _query.GetAllClients();
+                return Ok(clients);
+            }
+            catch(Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
     }
 }

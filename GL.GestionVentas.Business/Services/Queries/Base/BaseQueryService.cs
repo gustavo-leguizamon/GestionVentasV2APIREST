@@ -20,22 +20,22 @@ namespace GL.GestionVentas.Business.Services.Queries.Base
             Mapper = mapper;
         }
 
-        public void Detach(E entity)
+        public virtual void Detach(E entity)
         {
             Query.Detach(entity);
         }
 
-        public IQueryable<E> FindBy(Expression<Func<E, bool>> predicate, string[] includeProperties = null)
+        public virtual IQueryable<E> FindBy(Expression<Func<E, bool>> predicate, string[] includeProperties = null)
         {
             return Query.FindBy(predicate, includeProperties);
         }
 
-        public E FindById(int id)
+        public virtual E FindById(int id)
         {
             return Query.FindById(id);
         }
 
-        public IQueryable<E> GetAll()
+        public virtual IQueryable<E> GetAll()
         {
             return Query.GetAll();
         }
