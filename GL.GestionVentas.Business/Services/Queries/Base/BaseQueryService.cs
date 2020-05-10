@@ -8,7 +8,7 @@ using System.Text;
 
 namespace GL.GestionVentas.Business.Services.Queries.Base
 {
-    public class BaseQueryService<E> : IQueryService<E> where E : class
+    public abstract class BaseQueryService<E> : IQueryService<E> where E : class
     {
         protected readonly IQuery<E> Query;
 

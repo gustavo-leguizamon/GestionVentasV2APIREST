@@ -61,6 +61,8 @@ namespace GL.GestionVentas.API
             IMapper mapper = mappingConfig.CreateMapper();
             services.AddSingleton(mapper);
 
+            //services.AddAutoMapper(typeof(Startup));
+
             services.AddDbContext<GestionVentasContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddScoped(typeof(ISaleCommandRepository), typeof(SaleCommandRepository));
             services.AddScoped(typeof(ISaleCommandService), typeof(SaleCommandService));

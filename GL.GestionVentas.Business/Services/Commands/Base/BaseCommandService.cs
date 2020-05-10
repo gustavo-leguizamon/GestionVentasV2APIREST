@@ -8,10 +8,10 @@ using System.Threading.Tasks;
 
 namespace GL.GestionVentas.Business.Services.Commands.Base
 {
-    public class BaseCommandService<E> : ICommandService<E> where E : class
+    public abstract class BaseCommandService<E> : ICommandService<E> where E : class
     {
         protected readonly ICommand<E> Command;
-        protected IMapper Mapper;
+        protected readonly IMapper Mapper;
 
         public BaseCommandService(ICommand<E> command, IMapper mapper)
         {

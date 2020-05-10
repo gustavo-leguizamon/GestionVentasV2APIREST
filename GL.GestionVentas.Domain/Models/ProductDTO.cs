@@ -6,6 +6,7 @@ namespace GL.GestionVentas.Domain.Models
 {
     public class ProductDTO
     {
+        public int ProductoId { get; set; }
         public string Codigo { get; set; }
         public string Marca { get; set; }
         public string Nombre { get; set; }

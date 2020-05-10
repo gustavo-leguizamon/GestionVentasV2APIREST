@@ -8,6 +8,5 @@ namespace GL.GestionVentas.Domain.Interfaces.Repositories.Commands
 {
     public interface ISaleCommandRepository : ICommand<Ventas>
     {
-
     }
 }

@@ -6,7 +6,7 @@ namespace GL.GestionVentas.Domain.Models
 {
     public class SaleDTO
     {
-        public string Dni { get; set; }
-        public List<CartDTO> Carts { get; set; }
+        public int ClienteId { get; set; }
+        public CartDTO Cart { get; set; }
     }
 }

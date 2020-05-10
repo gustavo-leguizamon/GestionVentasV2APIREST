@@ -22,30 +22,17 @@ namespace GL.GestionVentas.Business.Services.Commands
         {
         }
 
-        public void RegisterSale(SaleDTO sale)
+        public void RegisterSale(SaleDTO saleDto)
         {
-            Producto product;
-            Cliente client;
-            using (var context = new GestionVentasContext())
-            {
-                product = new ProductQueryService(new ProductQueryRepository(context)).FindBy(x => x.Codigo.Equals(sale.ProductCode)).FirstOrDefault();
-                if (product == null)
-                    throw new ProductNotFoundException($"No existe el producto con el código: {sale.ProductCode}");
+            var sale = Mapper.Map<Ventas>(saleDto);
+            sale.Fecha = DateTime.Now;
+            sale.Carrito.ClienteId = saleDto.ClienteId;
+            var carts = new List<CarritoProducto>();
+            carts.AddRange(saleDto.Cart.Products.Select(x => new CarritoProducto() { ProductoId = x.ProductoId }));
 
-                client = new ClientQueryService(new ClientQueryRepository(context)).FindBy(x => x.DNI.Equals(sale.Dni)).FirstOrDefault();
-                if (client == null)
-                    throw new ClientNotFoundException($"No existe cliente con el DNI: {sale.Dni}");
+            Mapper.Map(carts, sale.Carrito.CarritoProductos);
 
-            }
-
-            //var newSale = new Ventas()
-            //{
-            //    ClienteId = client.ClienteId,
-            //    ProductoId = product.ProductoId,
-            //    Fecha = DateTime.Now
-            //};
-
-            //Command.Add(newSale);
+            Command.Add(sale);
         }
     }
 }

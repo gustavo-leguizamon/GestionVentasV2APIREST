@@ -33,14 +33,6 @@ namespace GL.GestionVentas.API.Controllers
                 _command.RegisterSale(sale);
                 return Ok();
             }
-            catch (ProductNotFoundException ex)
-            {
-                return StatusCode(404, ex.Message);
-            }
-            catch (ClientNotFoundException ex)
-            {
-                return StatusCode(404, ex.Message);
-            }
             catch (Exception ex)
             {
                 return StatusCode(500, ex.Message);
