@@ -1,4 +1,5 @@
-﻿using GL.GestionVentas.Domain.Interfaces.Repositories.Queries.Base;
+﻿using AutoMapper;
+using GL.GestionVentas.Domain.Interfaces.Repositories.Queries.Base;
 using GL.GestionVentas.Domain.Interfaces.Services.Queries.Base;
 using System;
 using System.Collections.Generic;
@@ -11,10 +12,12 @@ namespace GL.GestionVentas.Business.Services.Queries.Base
     public abstract class BaseQueryService<E> : IQueryService<E> where E : class
     {
         protected readonly IQuery<E> Query;
+        protected readonly IMapper Mapper;
 
-        public BaseQueryService(IQuery<E> query)
+        public BaseQueryService(IQuery<E> query, IMapper mapper)
         {
             Query = query;
+            Mapper = mapper;
         }
 
         public void Detach(E entity)

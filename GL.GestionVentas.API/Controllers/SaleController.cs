@@ -40,7 +40,8 @@ namespace GL.GestionVentas.API.Controllers
         }
 
         [HttpGet]
-        public ActionResult<List<Ventas>> DailySalesReport()
+        [Route("ReporteDiarioVentas")]
+        public ActionResult<List<DailySaleDTO>> DailySalesReport()
         {
             try
             {

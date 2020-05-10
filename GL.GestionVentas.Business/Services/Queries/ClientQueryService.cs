@@ -1,4 +1,5 @@
-﻿using GL.GestionVentas.Business.Services.Queries.Base;
+﻿using AutoMapper;
+using GL.GestionVentas.Business.Services.Queries.Base;
 using GL.GestionVentas.Domain.Entities;
 using GL.GestionVentas.Domain.Interfaces.Repositories.Queries;
 using GL.GestionVentas.Domain.Interfaces.Repositories.Queries.Base;
@@ -11,7 +12,7 @@ namespace GL.GestionVentas.Business.Services.Queries
 {
     public class ClientQueryService : BaseQueryService<Cliente>, IClientQueryService
     {
-        public ClientQueryService(IClientQueryRepository query) : base(query)
+        public ClientQueryService(IClientQueryRepository query, IMapper mapper) : base(query, mapper)
         {
         }
     }

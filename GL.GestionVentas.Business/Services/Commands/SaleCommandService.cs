@@ -30,7 +30,7 @@ namespace GL.GestionVentas.Business.Services.Commands
             var carts = new List<CarritoProducto>();
             carts.AddRange(saleDto.Cart.Products.Select(x => new CarritoProducto() { ProductoId = x.ProductoId }));
 
-            Mapper.Map(carts, sale.Carrito.CarritoProductos);
+            Mapper.Map(carts, sale.Carrito.CarritoProducto);
 
             Command.Add(sale);
         }
