@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using GL.GestionVentas.Domain.Interfaces.Services.Commands;
+using GL.GestionVentas.Domain.Interfaces.Services.Queries;
 using GL.GestionVentas.Domain.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -14,10 +15,12 @@ namespace GL.GestionVentas.API.Controllers
     public class ProductController : ControllerBase
     {
         private readonly IProductCommandService _command;
+        private readonly IProductQueryService _query;
 
-        public ProductController(IProductCommandService command)
+        public ProductController(IProductCommandService command, IProductQueryService query)
         {
             _command = command;
+            _query = query;
         }
 
         [HttpPost]
@@ -27,6 +30,20 @@ namespace GL.GestionVentas.API.Controllers
             {
                 _command.RegisterProduct(product);
                 return Ok();
+            }
+            catch(Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+
+        [HttpGet]
+        public ActionResult<List<ProductDTO>> GetProducts()
+        {
+            try
+            {
+                var products = _query.GetAllProducts();
+                return Ok(products);
             }
             catch(Exception ex)
             {

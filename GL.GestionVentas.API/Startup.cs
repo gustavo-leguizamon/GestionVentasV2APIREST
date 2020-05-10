@@ -74,6 +74,8 @@ namespace GL.GestionVentas.API
             services.AddScoped(typeof(IClientQueryService), typeof(ClientQueryService));
             services.AddScoped(typeof(IProductCommandRepository), typeof(ProductCommandRepository));
             services.AddScoped(typeof(IProductCommandService), typeof(ProductCommandService));
+            services.AddScoped(typeof(IProductQueryRepository), typeof(ProductQueryRepository));
+            services.AddScoped(typeof(IProductQueryService), typeof(ProductQueryService));
 
             services.AddControllers();
 
