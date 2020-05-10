@@ -50,5 +50,19 @@ namespace GL.GestionVentas.API.Controllers
                 return StatusCode(500, ex.Message);
             }
         }
+
+        [HttpGet("GetByCode/{productCode}")]
+        public ActionResult<ProductDTO> GetProductByCode(string productCode)
+        {
+            try
+            {
+                var product = _query.GetProductByCode(productCode);
+                return Ok(product);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
     }
 }

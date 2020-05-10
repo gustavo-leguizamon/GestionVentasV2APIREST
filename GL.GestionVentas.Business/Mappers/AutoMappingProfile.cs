@@ -23,7 +23,7 @@ namespace GL.GestionVentas.Business.Mappers
 
             CreateMap<Ventas, SaleDTO>();
             CreateMap<SaleDTO, Ventas>()
-                .ForMember(dest => dest.Carrito, opt => opt.MapFrom(src => src.Cart));
+                .ForMember(dest => dest.Carrito, opt => opt.MapFrom(src => src.Carrito));
 
             CreateMap<Ventas, DailySaleDTO>()
                 .ForMember(dest => dest.VentaId, opt => opt.MapFrom(src => src.VentasId))

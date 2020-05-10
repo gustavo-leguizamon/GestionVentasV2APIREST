@@ -39,7 +39,7 @@ namespace GL.GestionVentas.API.Controllers
             }
         }
 
-        [HttpGet("ReporteDiarioVentas")]
+        [HttpGet("DailyReport")]
         public ActionResult<List<DailySaleDTO>> DailySalesReport()
         {
             try
@@ -53,7 +53,7 @@ namespace GL.GestionVentas.API.Controllers
             }
         }
 
-        [HttpGet("ReporteDiarioVentas/{productId}")]
+        [HttpGet("DailyReport/{productId}")]
         public ActionResult<List<DailySaleDTO>> GetProductInDailyReport(int productId)
         {
             try

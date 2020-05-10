@@ -7,6 +7,7 @@ using GL.GestionVentas.Domain.Interfaces.Services.Queries;
 using GL.GestionVentas.Domain.Models;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace GL.GestionVentas.Business.Services.Queries
@@ -21,6 +22,12 @@ namespace GL.GestionVentas.Business.Services.Queries
         {
             var products = base.GetAll();
             return Mapper.Map<List<ProductDTO>>(products);
+        }
+
+        public ProductDTO GetProductByCode(string productCode)
+        {
+            var product = FindBy(x => x.Codigo.Equals(productCode)).FirstOrDefault();
+            return Mapper.Map<ProductDTO>(product);
         }
     }
 }

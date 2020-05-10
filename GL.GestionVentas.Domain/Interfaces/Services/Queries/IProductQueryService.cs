@@ -10,5 +10,6 @@ namespace GL.GestionVentas.Domain.Interfaces.Services.Queries
     public interface IProductQueryService : IQueryService<Producto>
     {
         List<ProductDTO> GetAllProducts();
+        ProductDTO GetProductByCode(string productCode);
     }
 }
