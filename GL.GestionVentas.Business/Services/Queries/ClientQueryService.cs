@@ -7,6 +7,7 @@ using GL.GestionVentas.Domain.Interfaces.Services.Queries;
 using GL.GestionVentas.Domain.Models;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace GL.GestionVentas.Business.Services.Queries
@@ -20,6 +21,18 @@ namespace GL.GestionVentas.Business.Services.Queries
         public List<ClientDTO> GetAllClients()
         {
             var clients = base.GetAll();
+            return Mapper.Map<List<ClientDTO>>(clients);
+        }
+
+        public List<ClientDTO> GetClientsByDNI(string dni)
+        {
+            var clients = base.FindBy(x => x.DNI.Equals(dni)).ToList();
+            return Mapper.Map<List<ClientDTO>>(clients);
+        }
+
+        public List<ClientDTO> GetClientsByName(string name, string lastname)
+        {
+            var clients = base.FindBy(x => x.Nombre.Contains(name) && x.Apellido.Contains(lastname)).ToList();
             return Mapper.Map<List<ClientDTO>>(clients);
         }
     }

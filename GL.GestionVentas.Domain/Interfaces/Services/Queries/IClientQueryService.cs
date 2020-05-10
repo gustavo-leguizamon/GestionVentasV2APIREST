@@ -10,5 +10,7 @@ namespace GL.GestionVentas.Domain.Interfaces.Services.Queries
     public interface IClientQueryService : IQueryService<Cliente>
     {
         List<ClientDTO> GetAllClients();
+        List<ClientDTO> GetClientsByDNI(string dni);
+        List<ClientDTO> GetClientsByName(string name, string lastname);
     }
 }
