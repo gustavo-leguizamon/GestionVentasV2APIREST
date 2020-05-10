@@ -11,6 +11,6 @@ namespace GL.GestionVentas.Domain.Interfaces.Services.Queries
     {
 
         List<DailySaleDTO> DailySalesReport();
-        List<Ventas> GetProductInDailyReport(string productCode);
+        List<DailySaleDTO> GetProductInDailyReport(int productId);
     }
 }

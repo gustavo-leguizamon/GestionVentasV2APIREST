@@ -30,13 +30,10 @@ namespace GL.GestionVentas.Business.Services.Queries
             return dailySales;
         }
 
-        public List<Ventas> GetProductInDailyReport(string productCode)
+        public List<DailySaleDTO> GetProductInDailyReport(int productId)
         {
             var salesOfTheDay = DailySalesReport();
-            //var sales = salesOfTheDay.Where(x => x.Producto.Codigo.Equals(productCode)).ToList();
-            var sales = new List<Ventas>();
-
-            return sales;
+            return salesOfTheDay.Where(x => x.Productos.Where(y => y.ProductoId == productId).Any()).ToList();
         }
     }
 }

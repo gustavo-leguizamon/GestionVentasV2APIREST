@@ -26,6 +26,7 @@ namespace GL.GestionVentas.Business.Mappers
                 .ForMember(dest => dest.Carrito, opt => opt.MapFrom(src => src.Cart));
 
             CreateMap<Ventas, DailySaleDTO>()
+                .ForMember(dest => dest.VentaId, opt => opt.MapFrom(src => src.VentasId))
                 .ForMember(dest => dest.Cliente, opt => opt.MapFrom(src => src.Carrito.Cliente))
                 .ForMember(dest => dest.Productos, opt => opt.MapFrom(src => src.Carrito.CarritoProducto.Select(x => x.Producto).ToList()));
         }
