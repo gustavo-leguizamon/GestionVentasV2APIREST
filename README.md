@@ -21,15 +21,18 @@
 ### Devuelve una lista de clientes según un DNI (GET)
 - http://localhost:56670/api/Client/GetByDNI/{dni}
 
-
+### Ejemplo
+```
 - http://localhost:56670/api/Client/GetByDNI/50000001
+```
 
 ### Devuelve una lista de clientes según coincidencias con un nombre y apellido (GET)
 - http://localhost:56670/api/Client/GetByName/{name}/{lastname}
 
-
+### Ejemplo
+```
 - http://localhost:56670/api/Client/GetByName/cosme/fulanito
-
+```
 
 ## Productos
 ### Registra un nuevo producto (POST)
@@ -53,9 +56,10 @@
 ### Devuelve un producto según un código (GET)
 - http://localhost:56670/api/Product/GetByCode/{code}
 
-
+### Ejemplo
+```
 - http://localhost:56670/api/Product/GetByCode/MOU
-
+```
 
 
 ## Ventas
@@ -90,5 +94,7 @@
 ### Reporte de ventas del día filtrado por algún producto (GET)
 - http://localhost:56670/api/Sale/DailyReport/{productId}
 
-
+### Ejemplo
+```
 - http://localhost:56670/api/Sale/DailyReport/2
+```
