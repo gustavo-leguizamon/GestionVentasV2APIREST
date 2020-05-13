@@ -1,7 +1,7 @@
 # GestionVentasV2APIREST
 
 ## Clientes
-### Registra un nuevo cliente
+### Registra un nuevo cliente (POST)
 - http://localhost:56670/api/Client
 
 ### JSON
@@ -15,18 +15,24 @@
 }
 ```
 
-### Devuelve una lista con todos los clientes
+### Devuelve una lista con todos los clientes (GET)
 - http://localhost:56670/api/Client
 
-### Devuelve una lista de clientes según un DNI
+### Devuelve una lista de clientes según un DNI (GET)
+- http://localhost:56670/api/Client/GetByDNI/{dni}
+
+
 - http://localhost:56670/api/Client/GetByDNI/50000001
 
-### Devuelve una lista de clientes según coincidencias con un nombre y apellido
-- http://localhost:56670/api/Client/GetByName/to5/ez
+### Devuelve una lista de clientes según coincidencias con un nombre y apellido (GET)
+- http://localhost:56670/api/Client/GetByName/{name}/{lastname}
+
+
+- http://localhost:56670/api/Client/GetByName/cosme/fulanito
 
 
 ## Productos
-### Registra un nuevo producto
+### Registra un nuevo producto (POST)
 - http://localhost:56670/api/Product
 
 ### JSON
@@ -40,17 +46,20 @@
 ```
 
 
-### Devuelve una lista con todos los productos
+### Devuelve una lista con todos los productos (GET)
 - http://localhost:56670/api/Product
 
 
-### Devuelve un producto según un código
-- http://localhost:56670/api/Product/GetByCode/f
+### Devuelve un producto según un código (GET)
+- http://localhost:56670/api/Product/GetByCode/{code}
+
+
+- http://localhost:56670/api/Product/GetByCode/MOU
 
 
 
 ## Ventas
-### Registrar venta de productos
+### Registrar venta de productos (POST)
 - http://localhost:56670/api/Sale
 
 ### JSON
@@ -74,10 +83,12 @@
 ```
 
 
-### Reporte de ventas del día
+### Reporte de ventas del día (GET)
 - http://localhost:56670/api/Sale/DailyReport
 
 
-### Reporte de ventas del día filtrado por algún producto
-- http://localhost:56670/api/Sale/DailyReport/2
+### Reporte de ventas del día filtrado por algún producto (GET)
+- http://localhost:56670/api/Sale/DailyReport/{productId}
 
+
+- http://localhost:56670/api/Sale/DailyReport/2
