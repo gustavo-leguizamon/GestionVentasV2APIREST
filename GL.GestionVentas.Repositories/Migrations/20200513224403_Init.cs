@@ -138,13 +138,19 @@ namespace GL.GestionVentas.Repositories.Migrations
                 values: new object[] { 2, 2 });
 
             migrationBuilder.InsertData(
+                table: "Carrito",
+                columns: new[] { "CarritoId", "ClienteId" },
+                values: new object[] { 3, 2 });
+
+            migrationBuilder.InsertData(
                 table: "CarritoProducto",
                 columns: new[] { "CarritoProductoId", "CarritoId", "ProductoId" },
                 values: new object[,]
                 {
                     { 1, 1, 3 },
                     { 2, 1, 4 },
-                    { 3, 2, 3 }
+                    { 3, 2, 3 },
+                    { 4, 3, 5 }
                 });
 
             migrationBuilder.InsertData(
@@ -152,9 +158,9 @@ namespace GL.GestionVentas.Repositories.Migrations
                 columns: new[] { "VentasId", "CarritoId", "Fecha" },
                 values: new object[,]
                 {
-                    { 1, 1, new DateTime(2020, 5, 7, 1, 12, 17, 630, DateTimeKind.Local).AddTicks(1415) },
-                    { 2, 1, new DateTime(2020, 5, 7, 1, 12, 17, 631, DateTimeKind.Local).AddTicks(9391) },
-                    { 3, 2, new DateTime(2020, 5, 7, 1, 12, 17, 631, DateTimeKind.Local).AddTicks(9494) }
+                    { 1, 1, new DateTime(2020, 5, 13, 19, 44, 2, 909, DateTimeKind.Local).AddTicks(5061) },
+                    { 2, 2, new DateTime(2020, 5, 13, 19, 44, 2, 912, DateTimeKind.Local).AddTicks(6018) },
+                    { 3, 3, new DateTime(2020, 5, 13, 19, 44, 2, 912, DateTimeKind.Local).AddTicks(6174) }
                 });
 
             migrationBuilder.CreateIndex(
@@ -181,7 +187,8 @@ namespace GL.GestionVentas.Repositories.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Ventas_CarritoId",
                 table: "Ventas",
-                column: "CarritoId");
+                column: "CarritoId",
+                unique: true);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

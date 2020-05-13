@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GL.GestionVentas.Repositories.Migrations
 {
     [DbContext(typeof(GestionVentasContext))]
-    [Migration("20200507041218_Init")]
+    [Migration("20200513224403_Init")]
     partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -46,6 +46,11 @@ namespace GL.GestionVentas.Repositories.Migrations
                         new
                         {
                             CarritoId = 2,
+                            ClienteId = 2
+                        },
+                        new
+                        {
+                            CarritoId = 3,
                             ClienteId = 2
                         });
                 });
@@ -91,6 +96,12 @@ namespace GL.GestionVentas.Repositories.Migrations
                             CarritoProductoId = 3,
                             CarritoId = 2,
                             ProductoId = 3
+                        },
+                        new
+                        {
+                            CarritoProductoId = 4,
+                            CarritoId = 3,
+                            ProductoId = 5
                         });
                 });
 
@@ -253,7 +264,8 @@ namespace GL.GestionVentas.Repositories.Migrations
 
                     b.HasKey("VentasId");
 
-                    b.HasIndex("CarritoId");
+                    b.HasIndex("CarritoId")
+                        .IsUnique();
 
                     b.ToTable("Ventas");
 
@@ -262,19 +274,19 @@ namespace GL.GestionVentas.Repositories.Migrations
                         {
                             VentasId = 1,
                             CarritoId = 1,
-                            Fecha = new DateTime(2020, 5, 7, 1, 12, 17, 630, DateTimeKind.Local).AddTicks(1415)
+                            Fecha = new DateTime(2020, 5, 13, 19, 44, 2, 909, DateTimeKind.Local).AddTicks(5061)
                         },
                         new
                         {
                             VentasId = 2,
-                            CarritoId = 1,
-                            Fecha = new DateTime(2020, 5, 7, 1, 12, 17, 631, DateTimeKind.Local).AddTicks(9391)
+                            CarritoId = 2,
+                            Fecha = new DateTime(2020, 5, 13, 19, 44, 2, 912, DateTimeKind.Local).AddTicks(6018)
                         },
                         new
                         {
                             VentasId = 3,
-                            CarritoId = 2,
-                            Fecha = new DateTime(2020, 5, 7, 1, 12, 17, 631, DateTimeKind.Local).AddTicks(9494)
+                            CarritoId = 3,
+                            Fecha = new DateTime(2020, 5, 13, 19, 44, 2, 912, DateTimeKind.Local).AddTicks(6174)
                         });
                 });
 
@@ -290,7 +302,7 @@ namespace GL.GestionVentas.Repositories.Migrations
             modelBuilder.Entity("GL.GestionVentas.Domain.Entities.CarritoProducto", b =>
                 {
                     b.HasOne("GL.GestionVentas.Domain.Entities.Carrito", "Carrito")
-                        .WithMany("CarritoProductos")
+                        .WithMany("CarritoProducto")
                         .HasForeignKey("CarritoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

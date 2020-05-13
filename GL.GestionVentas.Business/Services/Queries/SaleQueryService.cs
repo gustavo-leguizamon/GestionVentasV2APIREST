@@ -20,10 +20,10 @@ namespace GL.GestionVentas.Business.Services.Queries
 
         public List<DailySaleDTO> DailySalesReport()
         {
-            var sales = FindBy(x => x.Fecha.DayOfYear >= DateTime.Now.DayOfYear, new string[] { "Carrito",
-                                                                                                "Carrito.Cliente",
-                                                                                                "Carrito.CarritoProducto",
-                                                                                                "Carrito.CarritoProducto.Producto" }).ToList();
+            var sales = FindBy(x => x.Fecha.Date == DateTime.Today, new string[] { "Carrito",
+                                                                                   "Carrito.Cliente",
+                                                                                   "Carrito.CarritoProducto",
+                                                                                   "Carrito.CarritoProducto.Producto" }).ToList();
 
             var dailySales = Mapper.Map<List<DailySaleDTO>>(sales);
 

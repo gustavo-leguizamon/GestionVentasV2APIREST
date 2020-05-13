@@ -59,7 +59,8 @@ namespace GL.GestionVentas.Repositories.Contexts
 
                 entity.HasData(
                     new Carrito() { CarritoId = 1, ClienteId = 1 },
-                    new Carrito() { CarritoId = 2, ClienteId = 2 }
+                    new Carrito() { CarritoId = 2, ClienteId = 2 },
+                    new Carrito() { CarritoId = 3, ClienteId = 2 }
                 );
 
             });
@@ -70,12 +71,14 @@ namespace GL.GestionVentas.Repositories.Contexts
                 entity.Property(e => e.VentasId).UseIdentityColumn();
                 entity.Property(e => e.Fecha).HasColumnType("datetime").IsRequired();
 
+                entity.HasIndex(e => e.CarritoId).IsUnique();
+
                 entity.HasOne(e => e.Carrito).WithMany(c => c.Ventas).HasForeignKey(e => e.CarritoId).IsRequired();
 
                 entity.HasData(
                     new Ventas() { VentasId = 1, Fecha = DateTime.Now, CarritoId = 1 },
-                    new Ventas() { VentasId = 2, Fecha = DateTime.Now, CarritoId = 1 },
-                    new Ventas() { VentasId = 3, Fecha = DateTime.Now, CarritoId = 2 }
+                    new Ventas() { VentasId = 2, Fecha = DateTime.Now, CarritoId = 2 },
+                    new Ventas() { VentasId = 3, Fecha = DateTime.Now, CarritoId = 3 }
                 );
             });
 
@@ -90,7 +93,8 @@ namespace GL.GestionVentas.Repositories.Contexts
                 entity.HasData(
                     new CarritoProducto() { CarritoProductoId = 1, CarritoId = 1, ProductoId = 3 },
                     new CarritoProducto() { CarritoProductoId = 2, CarritoId = 1, ProductoId = 4 },
-                    new CarritoProducto() { CarritoProductoId = 3, CarritoId = 2, ProductoId = 3 }
+                    new CarritoProducto() { CarritoProductoId = 3, CarritoId = 2, ProductoId = 3 },
+                    new CarritoProducto() { CarritoProductoId = 4, CarritoId = 3, ProductoId = 5 }
                 );
             });
 
