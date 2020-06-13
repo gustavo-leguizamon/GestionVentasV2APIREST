@@ -106,14 +106,15 @@ namespace GL.GestionVentas.Repositories.Contexts
                 entity.HasIndex(e => e.Codigo).IsUnique();
                 entity.Property(e => e.Marca).HasMaxLength(45);
                 entity.Property(e => e.Nombre).HasMaxLength(45).IsRequired();
+                entity.Property(e => e.Imagen).HasMaxLength(1000);
                 entity.Property(e => e.Precio).HasPrecision(15, 2).IsRequired();
 
                 entity.HasData(
-                    new Producto() { ProductoId = 1, Codigo = "MOU", Nombre = "Mouse", Marca = "Noganet", Precio = 10 },
-                    new Producto() { ProductoId = 2, Codigo = "CAM", Nombre = "Camara", Marca = null, Precio = 15 },
-                    new Producto() { ProductoId = 3, Codigo = "TEC", Nombre = "Teclado", Marca = "Noganet", Precio = 20 },
-                    new Producto() { ProductoId = 4, Codigo = "MON", Nombre = "Monitor", Marca = "Samsung", Precio = 38 },
-                    new Producto() { ProductoId = 5, Codigo = "CPU", Nombre = "CPU", Marca = "Gigabit", Precio = 250 }
+                    new Producto() { ProductoId = 1, Codigo = "MOU", Nombre = "Mouse", Marca = "Noganet", Imagen = "https://www.xt-pc.com.ar/img/productos/Pics_Prod/MOU606.jpg", Precio = 10 },
+                    new Producto() { ProductoId = 2, Codigo = "CAM", Nombre = "Camara", Marca = null, Imagen = "https://arsonyb2c.vteximg.com.br/arquivos/ids/292526-1000-1000/ILCE-7K_Black-0.jpg?v=637124363789970000", Precio = 15 },
+                    new Producto() { ProductoId = 3, Codigo = "TEC", Nombre = "Teclado", Marca = "Noganet", Imagen = "https://http2.mlstatic.com/teclado-usb-ergonomico-pc-notebook-oficina-qwerty-espanol-garantia-oficial-D_NQ_NP_626103-MLA31936565669_082019-F.jpg", Precio = 20 },
+                    new Producto() { ProductoId = 4, Codigo = "MON", Nombre = "Monitor", Marca = "Samsung", Imagen = "https://images.samsung.com/is/image/samsung/uk-led-sf350-ls24f350fhuxen-001-front-black?$PD_GALLERY_L_JPG$", Precio = 38 },
+                    new Producto() { ProductoId = 5, Codigo = "CPU", Nombre = "CPU", Marca = "Gigabit", Imagen = "https://vignette2.wikia.nocookie.net/applezone/images/6/67/CPU.jpg/revision/latest?cb=20120318030604&path-prefix=es", Precio = 250 }
                 );
             });
         }

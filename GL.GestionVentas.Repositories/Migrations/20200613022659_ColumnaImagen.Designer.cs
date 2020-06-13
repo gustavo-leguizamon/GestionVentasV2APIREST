@@ -4,14 +4,16 @@ using GL.GestionVentas.Repositories.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace GL.GestionVentas.Repositories.Migrations
 {
     [DbContext(typeof(GestionVentasContext))]
-    partial class GestionVentasContextModelSnapshot : ModelSnapshot
+    [Migration("20200613022659_ColumnaImagen")]
+    partial class ColumnaImagen
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
