@@ -31,7 +31,7 @@ namespace GL.GestionVentas.API.Controllers
             try
             {
                 _command.RegisterSale(sale);
-                return Ok();
+                return Created("", "{\"result\":\"ok\"}");
             }
             catch (Exception ex)
             {
