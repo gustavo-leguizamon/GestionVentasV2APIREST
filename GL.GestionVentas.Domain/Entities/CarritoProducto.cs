@@ -9,6 +9,7 @@ namespace GL.GestionVentas.Domain.Entities
         public int CarritoProductoId { get; set; }
         public int CarritoId { get; set; }
         public int ProductoId { get; set; }
+        public int Cantidad { get; set; }
 
         public virtual Carrito Carrito { get; set; }
         public virtual Producto Producto { get; set; }

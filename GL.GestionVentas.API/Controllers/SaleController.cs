@@ -66,5 +66,33 @@ namespace GL.GestionVentas.API.Controllers
                 return StatusCode(500, ex.Message);
             }
         }
+
+        [HttpGet("[action]/{clientId}")]
+        public ActionResult<List<CustomerPurchaseDTO>> GetClientSales(int clientId)
+        {
+            try
+            {
+                var sales = _query.GetClientSales(clientId);
+                return Ok(sales);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+
+        [HttpPost("[action]")]
+        public ActionResult<List<CustomerPurchaseDTO>> CancelPurchase([FromBody]int saleID)
+        {
+            try
+            {
+                _command.CancelPurchase(saleID);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
     }
 }

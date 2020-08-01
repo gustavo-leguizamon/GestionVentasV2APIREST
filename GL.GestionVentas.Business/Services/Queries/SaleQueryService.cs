@@ -30,6 +30,14 @@ namespace GL.GestionVentas.Business.Services.Queries
             return dailySales;
         }
 
+        public List<CustomerPurchaseDTO> GetClientSales(int clientId)
+        {
+            var sales = Query.FindBy(x => x.Carrito.ClienteId == clientId, new string[] { "Carrito", "Carrito.CarritoProducto", "Carrito.CarritoProducto.Producto" }).ToList();
+            var customerPurchases = Mapper.Map<List<CustomerPurchaseDTO>>(sales);
+
+            return customerPurchases;
+        }
+
         public List<DailySaleDTO> GetProductInDailyReport(int productId)
         {
             var salesOfTheDay = DailySalesReport();

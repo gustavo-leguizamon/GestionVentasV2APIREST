@@ -10,5 +10,6 @@ namespace GL.GestionVentas.Domain.Interfaces.Services.Commands
     public interface ISaleCommandService : ICommandService<Ventas>
     {
         void RegisterSale(SaleDTO sale);
+        void CancelPurchase(int saleID);
     }
 }

@@ -23,12 +23,21 @@ namespace GL.GestionVentas.Business.Mappers
 
             CreateMap<Ventas, SaleDTO>();
             CreateMap<SaleDTO, Ventas>()
-                .ForMember(dest => dest.Carrito, opt => opt.MapFrom(src => src.Carrito));
+                .ForMember(dest => dest.Carrito, opt => opt.MapFrom(src => src.Carrito))
+                .ForMember(dest => dest.PrecioTotal, opt => opt.MapFrom(src => src.TotalPrice));
 
             CreateMap<Ventas, DailySaleDTO>()
                 .ForMember(dest => dest.VentaId, opt => opt.MapFrom(src => src.VentasId))
                 .ForMember(dest => dest.Cliente, opt => opt.MapFrom(src => src.Carrito.Cliente))
                 .ForMember(dest => dest.Productos, opt => opt.MapFrom(src => src.Carrito.CarritoProducto.Select(x => x.Producto).ToList()));
+
+            CreateMap<Ventas, CustomerPurchaseDTO>()
+                .ForMember(dest => dest.SaleId, opt => opt.MapFrom(src => src.VentasId))
+                .ForMember(dest => dest.Date, opt => opt.MapFrom(src => src.Fecha.ToString("dd/MM/yyyy HH:mm")))
+                .ForMember(dest => dest.QuantityProducts, opt => opt.MapFrom(src => src.Carrito.CarritoProducto.Sum(x => x.Cantidad)))
+                .ForMember(dest => dest.TotalPrice, opt => opt.MapFrom(src => src.PrecioTotal))
+                .ForMember(dest => dest.StateId, opt => opt.MapFrom(src => src.EstadoId))
+                ;
         }
     }
 }

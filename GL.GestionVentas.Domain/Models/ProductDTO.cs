@@ -12,5 +12,6 @@ namespace GL.GestionVentas.Domain.Models
         public string Nombre { get; set; }
         public string Imagen { get; set; }
         public decimal Precio { get; set; }
+        public int Cantidad { get; set; }
     }
 }

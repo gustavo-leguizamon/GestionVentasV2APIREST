@@ -4,14 +4,16 @@ using GL.GestionVentas.Repositories.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace GL.GestionVentas.Repositories.Migrations
 {
     [DbContext(typeof(GestionVentasContext))]
-    partial class GestionVentasContextModelSnapshot : ModelSnapshot
+    [Migration("20200730230829_TABLE_estado")]
+    partial class TABLE_estado
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -253,7 +255,7 @@ namespace GL.GestionVentas.Repositories.Migrations
                             Imagen = "https://www.xt-pc.com.ar/img/productos/Pics_Prod/MOU606.jpg",
                             Marca = "Noganet",
                             Nombre = "Mouse",
-                            Precio = 199.99m
+                            Precio = 10m
                         },
                         new
                         {
@@ -261,7 +263,7 @@ namespace GL.GestionVentas.Repositories.Migrations
                             Codigo = "CAM",
                             Imagen = "https://arsonyb2c.vteximg.com.br/arquivos/ids/292526-1000-1000/ILCE-7K_Black-0.jpg?v=637124363789970000",
                             Nombre = "Camara",
-                            Precio = 1500.00m
+                            Precio = 15m
                         },
                         new
                         {
@@ -270,7 +272,7 @@ namespace GL.GestionVentas.Repositories.Migrations
                             Imagen = "https://http2.mlstatic.com/teclado-usb-ergonomico-pc-notebook-oficina-qwerty-espanol-garantia-oficial-D_NQ_NP_626103-MLA31936565669_082019-F.jpg",
                             Marca = "Noganet",
                             Nombre = "Teclado",
-                            Precio = 2060m
+                            Precio = 20m
                         },
                         new
                         {
@@ -279,7 +281,7 @@ namespace GL.GestionVentas.Repositories.Migrations
                             Imagen = "https://images.samsung.com/is/image/samsung/uk-led-sf350-ls24f350fhuxen-001-front-black?$PD_GALLERY_L_JPG$",
                             Marca = "Samsung",
                             Nombre = "Monitor",
-                            Precio = 4650.50m
+                            Precio = 38m
                         },
                         new
                         {
@@ -288,52 +290,7 @@ namespace GL.GestionVentas.Repositories.Migrations
                             Imagen = "https://vignette2.wikia.nocookie.net/applezone/images/6/67/CPU.jpg/revision/latest?cb=20120318030604&path-prefix=es",
                             Marca = "Gigabit",
                             Nombre = "CPU",
-                            Precio = 6900m
-                        },
-                        new
-                        {
-                            ProductoId = 6,
-                            Codigo = "AUR",
-                            Imagen = "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQxHQK6bexxEunRDrGWtf-baJVbaFKOeX2cxA&usqp=CAU",
-                            Marca = "WorldTech",
-                            Nombre = "Auricular",
-                            Precio = 1299m
-                        },
-                        new
-                        {
-                            ProductoId = 7,
-                            Codigo = "SIL",
-                            Imagen = "https://images.bidcom.com.ar/resize?src=https://www.bidcom.com.ar/publicacionesML/productos/SILLA14X/1000x1000-SILLA14X.jpg&w=500&q=100",
-                            Marca = "WorldTech",
-                            Nombre = "Silla gamer",
-                            Precio = 30999.99m
-                        },
-                        new
-                        {
-                            ProductoId = 8,
-                            Codigo = "PAR",
-                            Imagen = "https://lh3.googleusercontent.com/proxy/_w0DznoyQ7Bn93pz8t3fY4zETeUWGQYH3ZWeiQkMCCdK7lnkuMuDH093tTDbaOdY1Ozi-hWD7oCRm0u31UBhbeZ2bucbfZGNlgy4",
-                            Marca = "Kolke",
-                            Nombre = "Parlantes",
-                            Precio = 299.99m
-                        },
-                        new
-                        {
-                            ProductoId = 9,
-                            Codigo = "NOT",
-                            Imagen = "https://http2.mlstatic.com/notebook-hp-250-g7-core-i3-7020u-8gb-1tb-156-win10-cta-off-D_NQ_NP_692739-MLA31428906360_072019-O.webp",
-                            Marca = "Intel",
-                            Nombre = "Notebook",
-                            Precio = 20099.00m
-                        },
-                        new
-                        {
-                            ProductoId = 10,
-                            Codigo = "JOY",
-                            Imagen = "https://http2.mlstatic.com/D_NQ_NP_702700-MLA32150735923_092019-O.webp",
-                            Marca = "Sony",
-                            Nombre = "Joystick",
-                            Precio = 13999m
+                            Precio = 250m
                         });
                 });
 
@@ -357,9 +314,6 @@ namespace GL.GestionVentas.Repositories.Migrations
                     b.Property<DateTime>("Fecha")
                         .HasColumnType("datetime");
 
-                    b.Property<decimal>("PrecioTotal")
-                        .HasColumnType("decimal(15,2)");
-
                     b.HasKey("VentasId");
 
                     b.HasIndex("CarritoId")
@@ -368,6 +322,29 @@ namespace GL.GestionVentas.Repositories.Migrations
                     b.HasIndex("EstadoId");
 
                     b.ToTable("Ventas");
+
+                    b.HasData(
+                        new
+                        {
+                            VentasId = 1,
+                            CarritoId = 1,
+                            EstadoId = 1,
+                            Fecha = new DateTime(2020, 7, 30, 20, 8, 28, 960, DateTimeKind.Local).AddTicks(3850)
+                        },
+                        new
+                        {
+                            VentasId = 2,
+                            CarritoId = 2,
+                            EstadoId = 1,
+                            Fecha = new DateTime(2020, 7, 30, 20, 8, 28, 962, DateTimeKind.Local).AddTicks(2144)
+                        },
+                        new
+                        {
+                            VentasId = 3,
+                            CarritoId = 3,
+                            EstadoId = 1,
+                            Fecha = new DateTime(2020, 7, 30, 20, 8, 28, 962, DateTimeKind.Local).AddTicks(2223)
+                        });
                 });
 
             modelBuilder.Entity("GL.GestionVentas.Domain.Entities.Carrito", b =>

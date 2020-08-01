@@ -22,13 +22,18 @@ namespace GL.GestionVentas.Business.Services.Commands
         {
         }
 
+        public void CancelPurchase(int saleID)
+        {
+            ((ISaleCommandRepository)Command).CancelPurchase(saleID);
+        }
+
         public void RegisterSale(SaleDTO saleDto)
         {
             var sale = Mapper.Map<Ventas>(saleDto);
             sale.Fecha = DateTime.Now;
             sale.Carrito.ClienteId = saleDto.ClienteId;
             var carts = new List<CarritoProducto>();
-            carts.AddRange(saleDto.Carrito.Productos.Select(x => new CarritoProducto() { ProductoId = x.ProductoId }));
+            carts.AddRange(saleDto.Carrito.Productos.Select(x => new CarritoProducto() { ProductoId = x.ProductoId, Cantidad = x.Cantidad }));
 
             Mapper.Map(carts, sale.Carrito.CarritoProducto);
 

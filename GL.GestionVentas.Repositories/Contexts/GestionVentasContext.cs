@@ -19,6 +19,7 @@ namespace GL.GestionVentas.Repositories.Contexts
         }
 
         public DbSet<Cliente> Cliente { get; set; }
+        public DbSet<Estado> Estado { get; set; }
         public DbSet<Ventas> Ventas { get; set; }
         public DbSet<Producto> Producto { get; set; }
         public DbSet<CarritoProducto> CarritoProducto { get; set; }
@@ -65,36 +66,46 @@ namespace GL.GestionVentas.Repositories.Contexts
 
             });
 
+            modelBuilder.Entity<Estado>(entity =>
+            {
+                entity.HasKey(e => e.EstadoId);
+                entity.Property(e => e.EstadoId).UseIdentityColumn();
+                entity.Property(e => e.Nombre).HasMaxLength(30).IsRequired();
+
+                entity.HasData(
+                    new Estado { EstadoId = 1, Nombre = "Activo" },
+                    new Estado { EstadoId = 2, Nombre = "Cancelado" }
+                );
+            });
+
             modelBuilder.Entity<Ventas>(entity =>
             {
                 entity.HasKey(e => e.VentasId);
                 entity.Property(e => e.VentasId).UseIdentityColumn();
                 entity.Property(e => e.Fecha).HasColumnType("datetime").IsRequired();
+                entity.Property(e => e.PrecioTotal).HasPrecision(15, 2).IsRequired();
+                entity.Property(e => e.EstadoId).HasDefaultValue(1).IsRequired();
 
                 entity.HasIndex(e => e.CarritoId).IsUnique();
 
                 entity.HasOne(e => e.Carrito).WithMany(c => c.Ventas).HasForeignKey(e => e.CarritoId).IsRequired();
-
-                entity.HasData(
-                    new Ventas() { VentasId = 1, Fecha = DateTime.Now, CarritoId = 1 },
-                    new Ventas() { VentasId = 2, Fecha = DateTime.Now, CarritoId = 2 },
-                    new Ventas() { VentasId = 3, Fecha = DateTime.Now, CarritoId = 3 }
-                );
+                entity.HasOne(e => e.Estado).WithMany(e => e.Ventas).HasForeignKey(e => e.EstadoId).IsRequired();
             });
 
             modelBuilder.Entity<CarritoProducto>(entity =>
             {
                 entity.HasKey(e => e.CarritoProductoId);
                 entity.Property(e => e.CarritoProductoId).UseIdentityColumn();
+                entity.Property(e => e.Cantidad).IsRequired();
 
                 entity.HasOne(e => e.Carrito).WithMany(c => c.CarritoProducto).HasForeignKey(e => e.CarritoId).IsRequired();
                 entity.HasOne(e => e.Producto).WithMany(p => p.CarritoProductos).HasForeignKey(e => e.ProductoId).IsRequired();
 
                 entity.HasData(
-                    new CarritoProducto() { CarritoProductoId = 1, CarritoId = 1, ProductoId = 3 },
-                    new CarritoProducto() { CarritoProductoId = 2, CarritoId = 1, ProductoId = 4 },
-                    new CarritoProducto() { CarritoProductoId = 3, CarritoId = 2, ProductoId = 3 },
-                    new CarritoProducto() { CarritoProductoId = 4, CarritoId = 3, ProductoId = 5 }
+                    new CarritoProducto() { CarritoProductoId = 1, CarritoId = 1, ProductoId = 3, Cantidad = 1 },
+                    new CarritoProducto() { CarritoProductoId = 2, CarritoId = 1, ProductoId = 4, Cantidad = 1 },
+                    new CarritoProducto() { CarritoProductoId = 3, CarritoId = 2, ProductoId = 3, Cantidad = 1 },
+                    new CarritoProducto() { CarritoProductoId = 4, CarritoId = 3, ProductoId = 5, Cantidad = 1 }
                 );
             });
 
@@ -110,11 +121,16 @@ namespace GL.GestionVentas.Repositories.Contexts
                 entity.Property(e => e.Precio).HasPrecision(15, 2).IsRequired();
 
                 entity.HasData(
-                    new Producto() { ProductoId = 1, Codigo = "MOU", Nombre = "Mouse", Marca = "Noganet", Imagen = "https://www.xt-pc.com.ar/img/productos/Pics_Prod/MOU606.jpg", Precio = 10 },
-                    new Producto() { ProductoId = 2, Codigo = "CAM", Nombre = "Camara", Marca = null, Imagen = "https://arsonyb2c.vteximg.com.br/arquivos/ids/292526-1000-1000/ILCE-7K_Black-0.jpg?v=637124363789970000", Precio = 15 },
-                    new Producto() { ProductoId = 3, Codigo = "TEC", Nombre = "Teclado", Marca = "Noganet", Imagen = "https://http2.mlstatic.com/teclado-usb-ergonomico-pc-notebook-oficina-qwerty-espanol-garantia-oficial-D_NQ_NP_626103-MLA31936565669_082019-F.jpg", Precio = 20 },
-                    new Producto() { ProductoId = 4, Codigo = "MON", Nombre = "Monitor", Marca = "Samsung", Imagen = "https://images.samsung.com/is/image/samsung/uk-led-sf350-ls24f350fhuxen-001-front-black?$PD_GALLERY_L_JPG$", Precio = 38 },
-                    new Producto() { ProductoId = 5, Codigo = "CPU", Nombre = "CPU", Marca = "Gigabit", Imagen = "https://vignette2.wikia.nocookie.net/applezone/images/6/67/CPU.jpg/revision/latest?cb=20120318030604&path-prefix=es", Precio = 250 }
+                    new Producto() { ProductoId = 1, Codigo = "MOU", Nombre = "Mouse", Marca = "Noganet", Imagen = "https://www.xt-pc.com.ar/img/productos/Pics_Prod/MOU606.jpg", Precio = 199.99M },
+                    new Producto() { ProductoId = 2, Codigo = "CAM", Nombre = "Camara", Marca = null, Imagen = "https://arsonyb2c.vteximg.com.br/arquivos/ids/292526-1000-1000/ILCE-7K_Black-0.jpg?v=637124363789970000", Precio = 1500.00M },
+                    new Producto() { ProductoId = 3, Codigo = "TEC", Nombre = "Teclado", Marca = "Noganet", Imagen = "https://http2.mlstatic.com/teclado-usb-ergonomico-pc-notebook-oficina-qwerty-espanol-garantia-oficial-D_NQ_NP_626103-MLA31936565669_082019-F.jpg", Precio = 2060M },
+                    new Producto() { ProductoId = 4, Codigo = "MON", Nombre = "Monitor", Marca = "Samsung", Imagen = "https://images.samsung.com/is/image/samsung/uk-led-sf350-ls24f350fhuxen-001-front-black?$PD_GALLERY_L_JPG$", Precio = 4650.50M },
+                    new Producto() { ProductoId = 5, Codigo = "CPU", Nombre = "CPU", Marca = "Gigabit", Imagen = "https://vignette2.wikia.nocookie.net/applezone/images/6/67/CPU.jpg/revision/latest?cb=20120318030604&path-prefix=es", Precio = 6900M },
+                    new Producto() { ProductoId = 6, Codigo = "AUR", Nombre = "Auricular", Marca = "WorldTech", Imagen = "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQxHQK6bexxEunRDrGWtf-baJVbaFKOeX2cxA&usqp=CAU", Precio = 1299M },
+                    new Producto() { ProductoId = 7, Codigo = "SIL", Nombre = "Silla gamer", Marca = "WorldTech", Imagen = "https://images.bidcom.com.ar/resize?src=https://www.bidcom.com.ar/publicacionesML/productos/SILLA14X/1000x1000-SILLA14X.jpg&w=500&q=100", Precio = 30999.99M },
+                    new Producto() { ProductoId = 8, Codigo = "PAR", Nombre = "Parlantes", Marca = "Kolke", Imagen = "https://lh3.googleusercontent.com/proxy/_w0DznoyQ7Bn93pz8t3fY4zETeUWGQYH3ZWeiQkMCCdK7lnkuMuDH093tTDbaOdY1Ozi-hWD7oCRm0u31UBhbeZ2bucbfZGNlgy4", Precio = 299.99M },
+                    new Producto() { ProductoId = 9, Codigo = "NOT", Nombre = "Notebook", Marca = "Intel", Imagen = "https://http2.mlstatic.com/notebook-hp-250-g7-core-i3-7020u-8gb-1tb-156-win10-cta-off-D_NQ_NP_692739-MLA31428906360_072019-O.webp", Precio = 20099.00M },
+                    new Producto() { ProductoId = 10, Codigo = "JOY", Nombre = "Joystick", Marca = "Sony", Imagen = "https://http2.mlstatic.com/D_NQ_NP_702700-MLA32150735923_092019-O.webp", Precio = 13999M }
                 );
             });
         }
